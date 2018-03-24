@@ -5,22 +5,23 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var DIST_DIR = path.resolve(__dirname, 'dist');
 var SRC_DIR = path.resolve(__dirname, 'src');
 
-var config = {
+module.exports = {
   entry: SRC_DIR + '/app/index.js',
   output: {
     path: DIST_DIR,
     filename: 'bundle.js',
-    publicPath: DIST_DIR
+    publicPath: '/dist'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
             options: {
-              presets: ['es2015']
+              presets: ['es2015', 'react']
             }
           }
         ]
